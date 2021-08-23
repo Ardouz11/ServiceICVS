@@ -1,0 +1,87 @@
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>API | Search Phonetics </title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='assets/img/favicons/logo.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='assets/img/favicons/logo.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='assets/img/favicons/logo.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicons/logo.ico')}}">
+    <!-- <link rel="manifest" href="{{ url_for('static', filename='assets/img/favicons/manifest.json')}}">-->
+   <meta name="msapplication-TileImage" content="{{ url_for('static', filename='assets/img/favicons/mstile-150x150.png')}}">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="{{ url_for('static', filename='assets/css/theme.css')}}" rel="stylesheet" />
+
+  </head>
+<body>
+ <main class="main" id="top">
+   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block navbar-klean" data-navbar-on-scroll="data-navbar-on-scroll">
+        <!--<div class="container"><a class="navbar-brand d-flex align-items-center fw-semi-bold fs-3" href="index.html"> <img class="me-3" src="{{ url_for('static', filename='assets/img/gallery/logo.png')}}" alt="" /></a>-->
+          <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto pt-2 pt-lg-0 font-base">
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link fw-medium active" href="/#home">Home</a></li>
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="/#gender">Gender Classification</a></li>
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="/#search">Search Phonetics</a></li>
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="/#request">How To Make a Request</a></li>
+            </ul>
+     
+          </div>
+        </div>
+      </nav>
+<section class="py-5" id="search">
+ <div class="container">
+          <div class="bg-holder" style="background-image:url({{ url_for('static', filename='assets/img/illustrations/feature-bg.png')}});background-position:right;background-size:auto;">
+          </div>
+          <div>
+          </div>
+          <section class="py-5" id="result">
+   <div class="container"id="searchnameresult" style=" text-align:center" >
+          <div class="row flex-center">
+            <div class="col-lg-5 mb-5">
+              <div class="card card-bg p-2">
+                <div class="card-body">
+                <h5 class="fw-bold display-4 fs-4 fs-lg-6 fs-xxl-3 text-gradient"><center>This is list of similarities of {{name}} </center> </h5>
+                {% for word in list_ %}
+                <h6 class="fw-bold fs-3 fs-lg-2 lh-sm mb-3"><center>{{word}} </center> </h6>
+                {% endfor %}
+               <!-- <button class="btn hover-top btn-glow btn-klean rounded-pill"" onclick='SearchName(event)'>Another request</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          </section>
+</section>
+</main>
+  
+    <script src="{{ url_for('static', filename='vendors/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='vendors/is/is.min.js')}}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="{{ url_for('static', filename='vendors/feathericons/feather.min.js')}}"></script>
+ 
+    <script>
+      feather.replace();
+    </script>
+    <script src="{{ url_for('static', filename='assets/js/theme.js')}}"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+</body>
+</html>
