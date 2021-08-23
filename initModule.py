@@ -11,7 +11,7 @@ import listToSublists
 #Instantiation of ConfigParser
 config=ConfigParser()
 def init():
-    df=pd.read_csv("../Datasets/national_names.csv")
+    df=pd.read_csv("./Datasets/national_names.csv")
     list_sorted=sortingList.dataFrameToList(df)
     #set the size of sharding
     size=config['tresholds']['size_of_sharding']

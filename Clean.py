@@ -10,7 +10,7 @@ def removePunctuation(word):
     return re.sub(r'[^\w\s]', '', word)
 def clean(word):
     return re.sub('[^a-zA-Z]','',word)
-df=pd.read_csv("../Datasets/national_names.csv")
+df=pd.read_csv("./Datasets/national_names.csv")
 df.sort_values('name')
 df_m=df.drop(["year","count"],axis=1)
 df_m["name"]=df_m["name"].apply(removePunctuation)
