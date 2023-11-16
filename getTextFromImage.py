@@ -2,22 +2,23 @@
 """
 Created on Wed Aug 11 10:44:00 2021
 
-@author: G525459
+@author: Ardouz11
 """
 
-import cv2 
+import image_preprocessing as preprocessing
 import json
+import cv2 
 import pytesseract as tess
 import initModule
 tesseractPath=initModule.initConfig()
-tess.pytesseract.tesseract_cmd=r"C:\Users\g525459\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+tess.pytesseract.tesseract_cmd=r"tesseract installation path"
 import re
-import image_preprocessing as preprocessing
 # Our custom config
-custom_config = r'-l eng --oem 3 --psm 6 '
+CUSTOMCONFIG = R'-L ENG --OEM 3 --PSM 6 '
 #-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789>< -c load_system_dawg=F -c load_freq_dawg=F
 # reading the image in the first place 
-def getText(filename):
+def get_text(filename):
+    """Function that gets text from image"""
     img = cv2.imread(str(filename))
     prctg_width=560/img.shape[1]
     prctg_height=790/img.shape[0]
@@ -30,10 +31,9 @@ def getText(filename):
 # Tresholding to convert the picture in black and white
     thresh= preprocessing.thresholding(gray)[1]
 # Getting the text from the image
-    Text_of_img=tess.image_to_string(thresh, config=custom_config)
-    Text_of_img1=Text_of_img.split('\n')
+    text_of_img=tess.image_to_string(thresh, config=CUSTOMCONFIG)
 # clean the text
-    Text_of_img_clean=re.sub('[^a-zA-Z0-9\<\/\s]','',Text_of_img)
-    Text_of_img_clean=Text_of_img_clean.replace('\n',' ')
-    Text_of_img_clean=Text_of_img_clean.strip()
-    return str(Text_of_img_clean)
+    text_of_img_clean=re.sub('[^a-zA-Z0-9\<\/\s]','',text_of_img)
+    text_of_img_clean=text_of_img_clean.replace('\n',' ')
+    text_of_img_clean=text_of_img_clean.strip()
+    return str(text_of_img_clean)
