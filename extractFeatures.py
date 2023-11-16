@@ -2,11 +2,11 @@
 """
 Created on Wed Jun 16 10:36:24 2021
 
-@author: G525459
+@author: Ardouz11
 """
 
-#---------------------------------- Function that exracts caracters from a given name in a dictionnary --------------------
 def features(name):
+    """ Function that exracts caracters from a given name in a dictionnary """
     name = name.lower()
     return {
         'first-letter': name[0], # First letter

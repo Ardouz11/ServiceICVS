@@ -7,20 +7,19 @@ Created on Wed Aug 11 10:31:49 2021
 import numpy as np
 import cv2
 def get_grayscale(image):
+    """Function that defines grayscale"""
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # noise removal
 def remove_noise(image):
+    """Function that removes noise"""
     return cv2.medianBlur(image,5)
  
-#thresholding
-#Simple Thresholding
-#For every pixel, the same threshold value is applied. 
-#If the pixel value is smaller than the threshold, it is set to 0, otherwise it is set to a maximum value.
+
 def thresholding(image):
+    """Simple Thresholding For every pixel, the same threshold value is applied. If the pixel value is smaller than the threshold, it is set to 0, otherwise it is set to a maximum value."""
     # global thresholding just tresh binary
     return cv2.threshold(image,0, 255,  cv2.THRESH_BINARY +cv2.THRESH_OTSU)
-    #return cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
 
 #dilation
 """

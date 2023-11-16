@@ -2,7 +2,7 @@
 """
 Created on Wed May 19 11:05:19 2021
 
-@author: G525459
+@author: Ardouz11
 """
 
 with open("output_list.txt") as file:

@@ -2,12 +2,13 @@
 """
 Created on Wed Jun 16 09:59:35 2021
 
-@author: G525459
+@author: Ardouz11
 """
-import numpy as np
 import timeit
+import numpy as np
 import matplotlib.pyplot as plt
-def comparingAppendOperation():
+def comparing_append_operation():
+    """Function of comparaison"""
     time=[]
     # Python list with append()
     list_time=np.mean(timeit.repeat(setup="a = []", stmt="a.append(1.0)", number=1000, repeat=5000)) * 1000
@@ -39,7 +40,7 @@ np.mean(timeit.repeat(setup="a = []", stmt="a.extend([1.0])", number=1000, repea
 np.mean(timeit.repeat(setup="import array; a = array.array('f')", stmt="a.extend([1.0]) ", number=1000, repeat=5000)) * 1000
 """
 if __name__=="__main__":
-    y=comparingAppendOperation()
+    y=comparing_append_operation()
     axis=["lists","array module"]
     plt.plot(axis,y,'b')
     plt.xlabel('different types ').set_color('blue')

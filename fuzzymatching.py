@@ -2,17 +2,14 @@
 """
 Created on Mon May 17 14:18:12 2021
 
-@author: G525459
+@author: Ardouz11
 """
-import initModule
 from strsimpy.jaro_winkler import JaroWinkler
-#--------------------------------- Initialisation --------------------------
+import initModule
 #set the treshold to default
 default_treshold=initModule.initConfig()
-#--------------------------------------------- Finding Similarities in list -----------------------------
-#Function that finds similarities between a word and other words in list 
-#it takes an optional argument treshold 
-def findSimilaritiesInShardedList(w,l,treshold=float(default_treshold)):
+def find_similarities_in_sharded_list(w,l,treshold=float(default_treshold)):
+    """Finding Similarities in list it finds similarities between a word and other words in list it takes an optional argument treshold """
     #List of similarities 
     similarities_in_shardedlist=[]
     #Instantiation of JaroWinkler Algorithme
@@ -23,7 +20,8 @@ def findSimilaritiesInShardedList(w,l,treshold=float(default_treshold)):
             similarities_in_shardedlist.append(word)
     return similarities_in_shardedlist
 #------------------------------------ Searching Algorithm -------------------------
-def findShardedList(arr, left, right, x):
+def find_sharded_list(arr, left, right, x):
+    """Function that implement binary search"""
     # Check if the right of the list is bigger than the left
     if right >= left:
         #calculate middle of the list
@@ -34,24 +32,24 @@ def findShardedList(arr, left, right, x):
         # if the last word in the middle sublist is bigger than the word 
         # then we will check the left sublists
         elif arr[mid][-1].lower() > x:
-            return findShardedList(arr, left, mid-1, x)
+            return find_sharded_list(arr, left, mid-1, x)
         # check the right sublists
         else:
-            return findShardedList(arr, mid + 1, right, x)
+            return find_sharded_list(arr, mid + 1, right, x)
     else:
         # Element is not present in the list
         return -1
-#-------------------------- Find Similarities in lists --------------------
-def findSimilarities(word,treshold=float(default_treshold)):
+def find_similarities(word,treshold=float(default_treshold)):
+    """Function that finds similarities in list"""
     list_of_similarities=[]
     #list that contains the sublists
     lists=initModule.init()
     #get the index of the sublist
-    index_of_shardedlist=findShardedList(lists, 0, len(lists),word)
+    index_of_shardedlist=find_sharded_list(lists, 0, len(lists),word)
     #find the similarities in the sublist
     #check if the index is valid 
     if index_of_shardedlist!=-1:
-        list_of_similarities=findSimilaritiesInShardedList(word,lists[index_of_shardedlist],treshold)
+        list_of_similarities=find_similarities_in_sharded_list(word,lists[index_of_shardedlist],treshold)
         return list_of_similarities
     #return empty list
     else:

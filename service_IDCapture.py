@@ -2,16 +2,19 @@
 """
 Created on Fri Jul  9 10:03:46 2021
 
-@author: G525459
+@author: Ardouz11
 """
 #Import libraries and modules
 import flask,os
-import dtree_model_predict,fuzzymatching,getTextFromImage,getFace
-from flask import render_template,request, jsonify,send_file
-from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
-#function that creates flask app 
+from flask_bootstrap import Bootstrap
+from flask import render_template,request, jsonify,send_file
+import dtree_model_predict
+import fuzzymatching 
+import getTextFromImage
+import getFace
 def create_app():
+  """Function that creates flask app """
   app = flask.Flask(__name__)
   Bootstrap(app)
   return app
@@ -43,7 +46,7 @@ def get_gender():
 def get_listofsimilarities():
     """Function that returns list of similarities of an entered name with the default treshold"""
     #defensive coding
-    list_similarities = fuzzymatching.findSimilarities(request.form['inputNameSearch'])
+    list_similarities = fuzzymatching.find_similarities(request.form['inputNameSearch'])
     if len(list_similarities)>0:
         response_list={"list":list_similarities}
         return jsonify(response_list)
@@ -51,17 +54,17 @@ def get_listofsimilarities():
         return render_template("exception.html",name=request.form['inputNameSearch']),404
 @app.route('/search_treshold', methods=['POST'])
 #Return list of similarities with treshold
-def get_listofsimilaritiesTreshold():
+def get_listofsimilarities_treshold():
     """ The same as the precedent function ,
     it returns also the list of similarities with a treshold entered by the user"""
-    list_similarities = fuzzymatching.findSimilarities(request.form['inputNameSearchTreshold'],float(request.form['inputNameTreshold']))
+    list_similarities = fuzzymatching.find_similarities(request.form['inputNameSearchTreshold'],float(request.form['inputNameTreshold']))
     if len(list_similarities)>0:
         response_treshold={"list":list_similarities}
         return jsonify(response_treshold)
     else:
         return render_template("exception_treshold.html",name=request.form['inputNameSearchTreshold'],treshold=request.form['inputNameTreshold']),404
 @app.route('/textExtraction', methods=['POST'])
-def extractData():
+def extract_data():
     """
     Function that extracts the data from a picture
     we save the picture uploaded to use it on the extraction 
@@ -70,11 +73,11 @@ def extractData():
     filename = secure_filename(file.filename)
     filepath = os.path.join('SavedCards/', filename);
     file.save(filepath)
-    text=getTextFromImage.getText(filepath)
+    text=getTextFromImage.get_text(filepath)
     response_data={"data":text}
     return jsonify(response_data)
 @app.route('/faceExtraction', methods=['POST'])
-def extractFace():
+def extract_face():
     """
     Function that recognizes the face in a picture
     we save the picture uploaded after this we return an 
@@ -84,6 +87,6 @@ def extractFace():
     filename = secure_filename(file.filename)
     filepath = os.path.join('SavedCards/', filename);
     file.save(filepath)
-    face=getFace.getFace(filepath)
+    face=getFace.get_face(filepath)
     return send_file(face,mimetype='image/jpeg')
 app.run(host='0.0.0.0',debug=True)
